@@ -1,0 +1,27 @@
+patron ejemplo {
+	voz a1 {
+		E5 1/4
+		E5 1/2
+		E5 1/4
+		S0 1/4
+		C5 1/4
+		E5 1/4
+		S0 1/4
+		G5 1/2
+		S0 1/2
+		G4 1/2
+	}
+	voz a2 {
+		C5 1/4
+		C5 1/2
+		C5 1/4
+		S0 1
+		B4 1/2
+		S0 1/2
+		B3 1/2
+	}
+}
+
+pista main {
+	play ejemplo
+}

@@ -1,0 +1,350 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Unused terminals:
+
+    INSTRUMENTO
+    ignore
+    ignore_COMMENT
+
+Grammar
+
+Rule 0     S' -> start
+Rule 1     funcion -> PLAY ID
+Rule 2     patron -> PATRON ID LCURLY patron_bloque RCURLY
+Rule 3     patron_bloque -> voz
+Rule 4     patron_bloque -> patron_bloque voz
+Rule 5     pista -> PISTA ID LCURLY pista_bloque RCURLY
+Rule 6     pista_bloque -> funcion
+Rule 7     pista_bloque -> pista_bloque funcion
+Rule 8     program -> pista program
+Rule 9     program -> patron program
+Rule 10    program -> pista
+Rule 11    program -> patron
+Rule 12    start -> program
+Rule 13    voz -> VOZ ID LCURLY voz_bloque RCURLY
+Rule 14    voz_bloque -> NOTA FRACCION
+Rule 15    voz_bloque -> voz_bloque NOTA FRACCION
+
+Terminals, with rules where they appear
+
+FRACCION             : 14 15
+ID                   : 1 2 5 13
+INSTRUMENTO          : 
+LCURLY               : 2 5 13
+NOTA                 : 14 15
+PATRON               : 2
+PISTA                : 5
+PLAY                 : 1
+RCURLY               : 2 5 13
+VOZ                  : 13
+error                : 
+ignore               : 
+ignore_COMMENT       : 
+
+Nonterminals, with rules where they appear
+
+funcion              : 6 7
+patron               : 9 11
+patron_bloque        : 2 4
+pista                : 8 10
+pista_bloque         : 5 7
+program              : 8 9 12
+start                : 0
+voz                  : 3 4
+voz_bloque           : 13 15
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . start
+    (12) start -> . program
+    (8) program -> . pista program
+    (9) program -> . patron program
+    (10) program -> . pista
+    (11) program -> . patron
+    (5) pista -> . PISTA ID LCURLY pista_bloque RCURLY
+    (2) patron -> . PATRON ID LCURLY patron_bloque RCURLY
+
+    PISTA           shift and go to state 5
+    PATRON          shift and go to state 6
+
+    start                          shift and go to state 1
+    program                        shift and go to state 2
+    pista                          shift and go to state 3
+    patron                         shift and go to state 4
+
+state 1
+
+    (0) S' -> start .
+
+
+
+state 2
+
+    (12) start -> program .
+
+    $end            reduce using rule 12 (start -> program .)
+
+
+state 3
+
+    (8) program -> pista . program
+    (10) program -> pista .
+    (8) program -> . pista program
+    (9) program -> . patron program
+    (10) program -> . pista
+    (11) program -> . patron
+    (5) pista -> . PISTA ID LCURLY pista_bloque RCURLY
+    (2) patron -> . PATRON ID LCURLY patron_bloque RCURLY
+
+    $end            reduce using rule 10 (program -> pista .)
+    PISTA           shift and go to state 5
+    PATRON          shift and go to state 6
+
+    pista                          shift and go to state 3
+    program                        shift and go to state 7
+    patron                         shift and go to state 4
+
+state 4
+
+    (9) program -> patron . program
+    (11) program -> patron .
+    (8) program -> . pista program
+    (9) program -> . patron program
+    (10) program -> . pista
+    (11) program -> . patron
+    (5) pista -> . PISTA ID LCURLY pista_bloque RCURLY
+    (2) patron -> . PATRON ID LCURLY patron_bloque RCURLY
+
+    $end            reduce using rule 11 (program -> patron .)
+    PISTA           shift and go to state 5
+    PATRON          shift and go to state 6
+
+    patron                         shift and go to state 4
+    program                        shift and go to state 8
+    pista                          shift and go to state 3
+
+state 5
+
+    (5) pista -> PISTA . ID LCURLY pista_bloque RCURLY
+
+    ID              shift and go to state 9
+
+
+state 6
+
+    (2) patron -> PATRON . ID LCURLY patron_bloque RCURLY
+
+    ID              shift and go to state 10
+
+
+state 7
+
+    (8) program -> pista program .
+
+    $end            reduce using rule 8 (program -> pista program .)
+
+
+state 8
+
+    (9) program -> patron program .
+
+    $end            reduce using rule 9 (program -> patron program .)
+
+
+state 9
+
+    (5) pista -> PISTA ID . LCURLY pista_bloque RCURLY
+
+    LCURLY          shift and go to state 11
+
+
+state 10
+
+    (2) patron -> PATRON ID . LCURLY patron_bloque RCURLY
+
+    LCURLY          shift and go to state 12
+
+
+state 11
+
+    (5) pista -> PISTA ID LCURLY . pista_bloque RCURLY
+    (6) pista_bloque -> . funcion
+    (7) pista_bloque -> . pista_bloque funcion
+    (1) funcion -> . PLAY ID
+
+    PLAY            shift and go to state 15
+
+    pista_bloque                   shift and go to state 13
+    funcion                        shift and go to state 14
+
+state 12
+
+    (2) patron -> PATRON ID LCURLY . patron_bloque RCURLY
+    (3) patron_bloque -> . voz
+    (4) patron_bloque -> . patron_bloque voz
+    (13) voz -> . VOZ ID LCURLY voz_bloque RCURLY
+
+    VOZ             shift and go to state 18
+
+    patron_bloque                  shift and go to state 16
+    voz                            shift and go to state 17
+
+state 13
+
+    (5) pista -> PISTA ID LCURLY pista_bloque . RCURLY
+    (7) pista_bloque -> pista_bloque . funcion
+    (1) funcion -> . PLAY ID
+
+    RCURLY          shift and go to state 19
+    PLAY            shift and go to state 15
+
+    funcion                        shift and go to state 20
+
+state 14
+
+    (6) pista_bloque -> funcion .
+
+    RCURLY          reduce using rule 6 (pista_bloque -> funcion .)
+    PLAY            reduce using rule 6 (pista_bloque -> funcion .)
+
+
+state 15
+
+    (1) funcion -> PLAY . ID
+
+    ID              shift and go to state 21
+
+
+state 16
+
+    (2) patron -> PATRON ID LCURLY patron_bloque . RCURLY
+    (4) patron_bloque -> patron_bloque . voz
+    (13) voz -> . VOZ ID LCURLY voz_bloque RCURLY
+
+    RCURLY          shift and go to state 22
+    VOZ             shift and go to state 18
+
+    voz                            shift and go to state 23
+
+state 17
+
+    (3) patron_bloque -> voz .
+
+    RCURLY          reduce using rule 3 (patron_bloque -> voz .)
+    VOZ             reduce using rule 3 (patron_bloque -> voz .)
+
+
+state 18
+
+    (13) voz -> VOZ . ID LCURLY voz_bloque RCURLY
+
+    ID              shift and go to state 24
+
+
+state 19
+
+    (5) pista -> PISTA ID LCURLY pista_bloque RCURLY .
+
+    PISTA           reduce using rule 5 (pista -> PISTA ID LCURLY pista_bloque RCURLY .)
+    PATRON          reduce using rule 5 (pista -> PISTA ID LCURLY pista_bloque RCURLY .)
+    $end            reduce using rule 5 (pista -> PISTA ID LCURLY pista_bloque RCURLY .)
+
+
+state 20
+
+    (7) pista_bloque -> pista_bloque funcion .
+
+    RCURLY          reduce using rule 7 (pista_bloque -> pista_bloque funcion .)
+    PLAY            reduce using rule 7 (pista_bloque -> pista_bloque funcion .)
+
+
+state 21
+
+    (1) funcion -> PLAY ID .
+
+    RCURLY          reduce using rule 1 (funcion -> PLAY ID .)
+    PLAY            reduce using rule 1 (funcion -> PLAY ID .)
+
+
+state 22
+
+    (2) patron -> PATRON ID LCURLY patron_bloque RCURLY .
+
+    PISTA           reduce using rule 2 (patron -> PATRON ID LCURLY patron_bloque RCURLY .)
+    PATRON          reduce using rule 2 (patron -> PATRON ID LCURLY patron_bloque RCURLY .)
+    $end            reduce using rule 2 (patron -> PATRON ID LCURLY patron_bloque RCURLY .)
+
+
+state 23
+
+    (4) patron_bloque -> patron_bloque voz .
+
+    RCURLY          reduce using rule 4 (patron_bloque -> patron_bloque voz .)
+    VOZ             reduce using rule 4 (patron_bloque -> patron_bloque voz .)
+
+
+state 24
+
+    (13) voz -> VOZ ID . LCURLY voz_bloque RCURLY
+
+    LCURLY          shift and go to state 25
+
+
+state 25
+
+    (13) voz -> VOZ ID LCURLY . voz_bloque RCURLY
+    (14) voz_bloque -> . NOTA FRACCION
+    (15) voz_bloque -> . voz_bloque NOTA FRACCION
+
+    NOTA            shift and go to state 27
+
+    voz_bloque                     shift and go to state 26
+
+state 26
+
+    (13) voz -> VOZ ID LCURLY voz_bloque . RCURLY
+    (15) voz_bloque -> voz_bloque . NOTA FRACCION
+
+    RCURLY          shift and go to state 28
+    NOTA            shift and go to state 29
+
+
+state 27
+
+    (14) voz_bloque -> NOTA . FRACCION
+
+    FRACCION        shift and go to state 30
+
+
+state 28
+
+    (13) voz -> VOZ ID LCURLY voz_bloque RCURLY .
+
+    RCURLY          reduce using rule 13 (voz -> VOZ ID LCURLY voz_bloque RCURLY .)
+    VOZ             reduce using rule 13 (voz -> VOZ ID LCURLY voz_bloque RCURLY .)
+
+
+state 29
+
+    (15) voz_bloque -> voz_bloque NOTA . FRACCION
+
+    FRACCION        shift and go to state 31
+
+
+state 30
+
+    (14) voz_bloque -> NOTA FRACCION .
+
+    RCURLY          reduce using rule 14 (voz_bloque -> NOTA FRACCION .)
+    NOTA            reduce using rule 14 (voz_bloque -> NOTA FRACCION .)
+
+
+state 31
+
+    (15) voz_bloque -> voz_bloque NOTA FRACCION .
+
+    RCURLY          reduce using rule 15 (voz_bloque -> voz_bloque NOTA FRACCION .)
+    NOTA            reduce using rule 15 (voz_bloque -> voz_bloque NOTA FRACCION .)
+
